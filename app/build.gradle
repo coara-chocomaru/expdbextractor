@@ -1,0 +1,60 @@
+plugins { 
+    id 'com.android.application'
+}
+
+android {
+    compileSdk = 36
+    namespace = 'com.coara.expdbextractor'
+
+    defaultConfig {
+        minSdk = 24
+        targetSdk = 34
+        versionCode = 35
+        versionName = "1.0"
+        multiDexEnabled = true
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
+    }
+    
+    signingConfigs {
+        release {
+            storeFile file('test.jks')
+            storePassword 'test1234'
+            keyAlias 'key0'
+            keyPassword 'test1234'
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig = signingConfigs.debug
+        }
+        release {
+            minifyEnabled = true
+            shrinkResources = true
+            debuggable = false
+            signingConfig = signingConfigs.release
+        }
+    }
+
+    lint {
+        disable += ['ExpiredTargetSdkVersion', 'NewApi', 'Range', 'SetTextI18n', 'ScopedStorage', 'FieldCanBeLocal', 'GradleDependency']
+    }
+    packagingOptions {
+        excludes += "DebugProbesKt.bin"
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += ["-Xlint:deprecation", "-Xlint:unchecked"]
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.activity:activity:1.9.0'
+}

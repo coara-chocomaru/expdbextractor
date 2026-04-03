@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0066cc</color>
+    <color name="colorPrimaryDark">#004a99</color>
+    <color name="colorOnPrimary">#ffffff</color>
+    
+    <color name="background">#f8f9fa</color>
+    <color name="log_background">#f0f0f0</color>
+</resources>
